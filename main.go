@@ -1,25 +1,40 @@
 package main
 
 import (
+	"deploy-golang/controllers"
+	"fmt"
 	"log"
-	"net/http"
-	"os"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
-	port := os.Getenv("PORT")
+
+	app := fiber.New()
+	app.Use(cors.New())
+
+	// controllers.SendMessage("Bom dia")
+
+	// Server
+	port := "8080"
+	// port := os.Getenv("PORT")
 	if port == "" {
 		panic("$PORT not set")
 	}
 
-	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-		log.Println("It's here within")
-		rw.Write([]byte("Hello world"))
-	})
+	app.Post("/api/messages", controllers.SendMessageController)
 
-	err := http.ListenAndServe(":"+port, nil)
+	// http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+	// 	log.Println("It's here within")
+	// 	rw.Write([]byte("Hello world"))
+	// })
 
-	if err != nil {
-		panic("error to listen server" + err.Error())
-	}
+	// err := http.ListenAndServe(":"+port, nil)
+
+	// if err != nil {
+	// 	panic("error to listen server" + err.Error())
+	// }
+
+	log.Fatal(app.Listen(fmt.Sprintf(":%v", port)))
 }
