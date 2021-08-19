@@ -9,10 +9,20 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
+func serveStatic(app *fiber.App) {
+	app.Static("/", "./build")
+}
+
 func main() {
 
+	//server
 	app := fiber.New()
+	//Handle Cors
 	app.Use(cors.New())
+	//Serve the build file
+	serveStatic(app)
+	//Setup Routes
+	//setupRoutes(app)
 
 	// controllers.SendMessage("Bom dia")
 
@@ -20,7 +30,8 @@ func main() {
 	// port := "8080"
 	port := os.Getenv("PORT")
 	if port == "" {
-		panic("$PORT not set")
+		// panic("$PORT not set")
+		port = "5000"
 	}
 
 	app.Post("/api/messages", controllers.SendMessageController)
