@@ -1,6 +1,6 @@
 package models
 
 type ResponseWatson struct {
-	Context  string `json:"context"`
-	Response string `json:"response"`
+	Context interface{} `json:"context"`
+	Output  interface{} `json:"output"`
 }

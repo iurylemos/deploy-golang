@@ -3,7 +3,6 @@ package main
 import (
 	"deploy-golang/controllers"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -37,5 +36,5 @@ func main() {
 	// 	panic("error to listen server" + err.Error())
 	// }
 
-	log.Fatal(app.Listen(fmt.Sprintf(":%v", port)))
+	app.Listen(fmt.Sprintf(":%v", port))
 }

@@ -3,6 +3,7 @@ package controllers
 import (
 	"deploy-golang/auth"
 	"deploy-golang/models"
+	"encoding/json"
 	"log"
 
 	"github.com/IBM/go-sdk-core/v5/core"
@@ -55,6 +56,14 @@ func SendMessageController(c *fiber.Ctx) error {
 		return responseErr
 	}
 
-	log.Println(response.Result)
-	return c.JSON([]string{})
+	byteData, _ := json.Marshal(response.Result)
+	var responseWatson models.ResponseWatson
+
+	if err := json.Unmarshal(byteData, &responseWatson); err != nil {
+		return err
+	}
+
+	log.Println(responseWatson)
+
+	return c.JSON(responseWatson)
 }
