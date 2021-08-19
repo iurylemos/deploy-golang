@@ -1,3 +1,3 @@
-module github.com/iurylemos/webapi-go-heroku
+module deploy-golang
 
 go 1.16

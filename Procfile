@@ -1,2 +1,2 @@
 Procrelease: ./relase-task.sh
-web: main.go
+web: ./bin/deploy-golang
