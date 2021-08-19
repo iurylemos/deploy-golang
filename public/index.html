@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
-<body>
-    <h1>Hello world</h1>
-</body>
+  <body class="demo-1">
+      <div class="container">
+          <div class="content">
+              <div class="chat-window">
+                  <div class="chat-messages">
+                      <ol class="chat-messages-list">
+                    </ol>
+                </div>
+                <div class="chat-input-bar">
+                    <div class="chat-info-container"></div>
+                    <div class="chat-effect-container">
+                        <div class="chat-effect-bar"></div>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <button class="chat-input-tool">
+                            <i class="icon icon-camera"></i>
+                        </button>
+                        <div class="chat-input" contenteditable></div>
+                        <button class="chat-send">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <script src="js/index.js"></script>
+  </body>
 </html>
