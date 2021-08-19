@@ -9,8 +9,10 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
+const PORT = "5000"
+
 func serveStatic(app *fiber.App) {
-	app.Static("/", "./build")
+	app.Static("/", "./public")
 }
 
 func main() {
@@ -21,31 +23,21 @@ func main() {
 	app.Use(cors.New())
 	//Serve the build file
 	serveStatic(app)
-	//Setup Routes
-	//setupRoutes(app)
-
-	// controllers.SendMessage("Bom dia")
 
 	// Server
 	// port := "8080"
-	port := os.Getenv("PORT")
-	if port == "" {
-		// panic("$PORT not set")
-		port = "5000"
-	}
+	// port := os.Getenv("PORT")
+	port := getEnv("PORT", PORT)
 
 	app.Post("/api/messages", controllers.SendMessageController)
 
-	// http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-	// 	log.Println("It's here within")
-	// 	rw.Write([]byte("Hello world"))
-	// })
+	app.Listen(fmt.Sprintf(":%s", port))
+}
 
-	// err := http.ListenAndServe(":"+port, nil)
-
-	// if err != nil {
-	// 	panic("error to listen server" + err.Error())
-	// }
-
-	app.Listen(fmt.Sprintf(":%v", port))
+// Gets default value passed if no value exist for given environment variable.
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
 }
