@@ -52,9 +52,9 @@ func SendMessageController(c *fiber.Ctx) error {
 
 	// Check successful call
 	if responseErr != nil {
-		panic(responseErr)
+		return responseErr
 	}
 
-	log.Println(response)
+	log.Println(response.Result)
 	return c.JSON([]string{})
 }

@@ -4,6 +4,7 @@ import (
 	"deploy-golang/controllers"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -17,8 +18,8 @@ func main() {
 	// controllers.SendMessage("Bom dia")
 
 	// Server
-	port := "8080"
-	// port := os.Getenv("PORT")
+	// port := "8080"
+	port := os.Getenv("PORT")
 	if port == "" {
 		panic("$PORT not set")
 	}
