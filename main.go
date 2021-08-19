@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 const PORT = "5000"
@@ -18,6 +19,8 @@ func main() {
 
 	//server
 	app := fiber.New()
+	//Handle Cors
+	app.Use(cors.New())
 	//Serve the build file
 	serveStatic(app)
 
@@ -28,7 +31,9 @@ func main() {
 
 	app.Post("/api/messages", controllers.SendMessageController)
 
-	app.Listen(fmt.Sprintf(":%s", port))
+	if err := app.Listen(fmt.Sprintf(":%s", port)); err != nil {
+		panic(err)
+	}
 }
 
 // Gets default value passed if no value exist for given environment variable.
