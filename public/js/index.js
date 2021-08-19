@@ -52,7 +52,7 @@ async function sendMessage() {
   try {
     const createBuble = bubbleUser(input);
 
-    const resp = await fetch("http://localhost:5000/api/messages", {
+    const resp = await fetch(`${window.location.origin}/api/messages`, {
       method: "POST",
       headers: {
         Accept: "application/json",
