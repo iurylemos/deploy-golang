@@ -3,8 +3,8 @@ package controllers
 import (
 	"deploy-golang/auth"
 	"deploy-golang/models"
+	"deploy-golang/services"
 	"encoding/json"
-	"log"
 
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/gofiber/fiber/v2"
@@ -13,7 +13,7 @@ import (
 
 func SendMessageController(c *fiber.Ctx) error {
 	var data models.RequestWatson
-	var context *assistant.Context
+	// var context *assistant.Context
 
 	if err := c.BodyParser(&data); err != nil {
 		return err
@@ -27,27 +27,17 @@ func SendMessageController(c *fiber.Ctx) error {
 
 	messageOptions := service.NewMessageOptions(*workspaceID)
 
-	if data.Context == nil {
-		// Call the Message method with no specified context
-		messageResult, _, responseErr := service.Message(messageOptions)
+	contx, err := services.GetContext(service, data.Context, messageOptions)
 
-		// Check successful call
-		if responseErr != nil {
-			return err
-		}
-
-		// log.Println(response)
-
-		context = messageResult.Context
-	} else {
-		context = data.Context
+	if err != nil {
+		return err
 	}
 
 	input := &assistant.MessageInput{
 		Text: core.StringPtr(data.Input),
 	}
 
-	messageOptions.SetContext(context).SetInput(input)
+	messageOptions.SetContext(contx).SetInput(input)
 
 	_, response, responseErr := service.Message(messageOptions)
 
@@ -62,8 +52,6 @@ func SendMessageController(c *fiber.Ctx) error {
 	if err := json.Unmarshal(byteData, &responseWatson); err != nil {
 		return err
 	}
-
-	log.Println(responseWatson)
 
 	return c.JSON(responseWatson)
 }
