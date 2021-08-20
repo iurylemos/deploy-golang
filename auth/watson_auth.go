@@ -20,7 +20,7 @@ func GetCredentials() (*assistant.AssistantV1, *string, error) {
 		return nil, nil, serviceErr
 	}
 
-	workspace, _, err := service.GetWorkspace(service.NewGetWorkspaceOptions("1c80c230-2ebf-4ba7-af7e-9eb7a18f0aae"))
+	workspace, _, err := service.GetWorkspace(service.NewGetWorkspaceOptions("36986997-5833-49db-9436-ffbd0258ad0c"))
 
 	if err != nil {
 		return nil, nil, err

@@ -81,7 +81,7 @@ function setLoad(val) {
 async function sendMessage() {
   try {
     chatInput.innerHTML = "";
-    const createBuble = bubbleUser(input);
+    listMessages.appendChild(bubbleUser(input));
     setLoad(true);
 
     const resp = await fetch(`${window.location.origin}/api/messages`, {
@@ -97,7 +97,6 @@ async function sendMessage() {
     console.log("JSON", json);
     setLoad(false);
     context = json.context;
-    listMessages.appendChild(createBuble);
 
     if (json.output.text) {
       listMessages.appendChild(bubbleChatbot(json.output.text[0]));
