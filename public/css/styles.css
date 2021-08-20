@@ -114,7 +114,7 @@ button:focus {
 }
 
 .chat-messages {
-  height: 395px;
+  height: 440px;
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
